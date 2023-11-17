@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 // This is the main contract.
 contract BlockBetCollective is ERC20 {
     uint256 public current_max_bet;
-    uint256 public coinflip_win_percentage = 55; 
+    uint256 public coinflip_win_percentage = 55;
 
     // Constructor for BB Token
     constructor() ERC20("BlockBet Token", "BB") {}
@@ -49,11 +49,6 @@ contract BlockBetCollective is ERC20 {
         update_max_bet();
     }
 
-    // Function to update the max bet
-    function update_max_bet() private {
-        current_max_bet = address(this).balance / 10;
-    }
-
     // Function to withdraw funds
     function withdraw_funds(uint256 tokenAmount) public {
         require(balanceOf(msg.sender) >= tokenAmount, "Insufficient BB tokens");
@@ -62,5 +57,12 @@ contract BlockBetCollective is ERC20 {
         _burn(msg.sender, tokenAmount);
         payable(msg.sender).transfer(ethToWithdraw);
         update_max_bet();
+    }
+
+    // Internal/Private functions
+
+    // Function to update the max bet
+    function update_max_bet() private {
+        current_max_bet = address(this).balance / 10;
     }
 }

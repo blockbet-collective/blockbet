@@ -41,7 +41,13 @@ npx hardhat test
 npx hardhat coverage
 ```
 
-- To deploy and verify the smart contracts on the sepolia testnet with your hardware wallet. Add your INFURA_KEY, and ETHERSCAN_API_KEY to the `.env` file:
+- To deploy/simulate the deployment locally:
+
+```shell
+npx hardhat run ./scripts/deploy.ts
+```
+
+- To deploy and verify the smart contracts on the sepolia testnet. Add your INFURA_KEY, and ETHERSCAN_API_KEY to the `.env` file:
 
 ```shell
 npx hardhat run ./scripts/deploy.ts --network sepolia

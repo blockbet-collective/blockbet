@@ -8,8 +8,8 @@ config({
   path: '.env'
 })
 
-const DUMMY_ETHEREUM_KEY = "0x0000000000000000000000000000000000000000000000000000000000000001";
-const DUMMY_SEPOLIA_KEY = "0x0000000000000000000000000000000000000000000000000000000000000001";
+const MAINNET_KEY = process.env.MAINNET_KEY || "0x0000000000000000000000000000000000000000000000000000000000000001";
+const SEPOLIA_KEY = process.env.SEPOLIA_KEY || "0x0000000000000000000000000000000000000000000000000000000000000001";
 const INFURA_KEY = process.env.INFURA_KEY || "";
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "";
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || "";
@@ -44,13 +44,13 @@ const configHardhat: HardhatUserConfig = {
     hardhat: {},
     sepolia: {
       url: `https://sepolia.infura.io/v3/${INFURA_KEY}`,
-      accounts: [DUMMY_SEPOLIA_KEY],
+      accounts: [SEPOLIA_KEY],
       chainId: 11155111,
     },
     mainnet: {
       url: `https://mainnet.infura.io/v3/${INFURA_KEY}`,
       gasPrice: 30000000000,
-      accounts: [DUMMY_ETHEREUM_KEY],
+      accounts: [MAINNET_KEY],
       chainId: 1,
     },
   },
