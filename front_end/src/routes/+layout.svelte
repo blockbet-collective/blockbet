@@ -111,7 +111,12 @@
 		}
 	});
 
-	import { bet, current_max_bet, getContractValue } from '../lib/Service/contractService';
+	import {
+		bet,
+		current_max_bet,
+		getContractValue,
+		liquidity
+	} from '../lib/Service/contractService';
 	import { onMount } from 'svelte';
 
 	function nameForChainId(id: number): string {
@@ -215,6 +220,12 @@
 		console.log($chainId);
 		current_max_bet($chainId);
 	}}>current_max_bet</Button
+>
+<Button
+	on:click={() => {
+		console.log($chainId);
+		liquidity($chainId);
+	}}>liquidity</Button
 >
 
 <slot />
