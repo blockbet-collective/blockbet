@@ -17,6 +17,9 @@ Scroll testnet:
 Deposit_funds transaction: https://sepolia-blockscout.scroll.io/tx/0x0f76ea5bc3dc97d6459a16b084e24502917a61c8b244f93ccd0d99e9153d9784
 Bet transaction: https://sepolia-blockscout.scroll.io/tx/0xae8913bee0f5127e6324265eea5de040b31b74c7b723e9ab287d868ae4534ea0
 
+IPFS storage link for NFTs:
+https://bafybeia3fhtkn52dfplyx4p5f3cvcvggyvauvfbpgnt4h2dqen6pvtwrrm.ipfs.nftstorage.link
+
 ## Setup of this repo
 
 - Clone this repo:
