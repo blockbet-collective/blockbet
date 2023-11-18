@@ -9,17 +9,14 @@
 		NavHamburger,
 		Badge,
 		Button,
-		Input
 	} from 'flowbite-svelte';
 	import {
 		signerAddress,
 		loading,
 		chainId,
-		wagmiLoaded,
 		connected,
 		web3Modal,
-		defaultConfig,
-		configureWagmi
+		defaultConfig
 	} from 'svelte-wagmi';
 	import {
 		mainnet,
@@ -40,17 +37,14 @@
 		scroll,
 		scrollSepolia,
 		polygonZkEvmTestnet,
-		polygonZkEvm
+		polygonZkEvm,
+		arbitrumGoerli
 	} from '@wagmi/core/chains';
 
 	import { page } from '$app/stores';
 
 	$: activeUrl = $page.url.pathname;
-
-	let something = '';
-
-	const WALLET_CONNECT_PROJECT_ID = '5a5f93d9fc51dcd86e891d30a5267400';
-
+	
 	const chilizTestnet: Chain = {
 		id: 88_882,
 		name: 'Chiliz Spicy Testnet',
@@ -94,6 +88,7 @@
 					arbitrum,
 					arbitrumNova,
 					arbitrumSepolia,
+					arbitrumGoerli,
 					mantle,
 					mantleTestnet,
 					lineaTestnet,
@@ -153,6 +148,8 @@
 				return 'Arbitrum One';
 			case 421614:
 				return 'Arbitrum Sepolia';
+			case 421613:
+				return 'Arbitrum Goerli';
 			default:
 				return 'Unknown';
 		}

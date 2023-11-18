@@ -18,10 +18,11 @@ async function deployBlockBetCollective(): Promise<BlockBetCollective> {
 
     const blockBetCollective = await blockBetCollectiveFactory.deploy()
     await blockBetCollective.deployed()
+    console.log(`BlockBetCollective at ${blockBetCollective.address}`)
 
     console.log('sleep')
     await sleep(50000)
-
+   
     if (network.name !== 'hardhat') {
         // Verifying BlockBetCollective
         try {
@@ -34,8 +35,8 @@ async function deployBlockBetCollective(): Promise<BlockBetCollective> {
             console.error(err)
         }
     }
-    console.log(`BlockBetCollective at ${blockBetCollective.address}`)
-
+    
+    console.log('verificationFinished')
     return blockBetCollective
 }
 

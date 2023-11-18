@@ -17,7 +17,12 @@ function getContractAddress(id: number | null | undefined): string {
 		// Scroll testnet 
 		case 534351:
 			return '0xe9A95a435D248873e107B68d4455c595119DF5BC';
+		// Arbitrum testnet 
+		case 421613:
+			return '0x2f210A4823B8bF68811691E7aFE9efDEf77f3AB6';
 	
+
+			
 		case 1:
 			return 'Mainnet';
 		case 3:

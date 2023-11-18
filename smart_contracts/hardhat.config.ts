@@ -35,6 +35,7 @@ const configHardhat: HardhatUserConfig = {
       mainnet: ETHERSCAN_API_KEY,
       linea: ETHERSCAN_API_KEY,
       scroll: ETHERSCAN_API_KEY,
+      abitrum: ETHERSCAN_API_KEY,
     },
     customChains: [
       {
@@ -65,9 +66,14 @@ const configHardhat: HardhatUserConfig = {
       chainId: 534351,
     },
     linea: {
-      url: `  https://linea-goerli.infura.io/v3/${INFURA_KEY}`,
+      url: `https://linea-goerli.infura.io/v3/${INFURA_KEY}`,
       accounts: [SEPOLIA_KEY],
       chainId: 59140,
+    },
+    arbitrumGoerli: {
+      url: 'https://goerli-rollup.arbitrum.io/rpc',
+      chainId: 421613,
+      accounts: [SEPOLIA_KEY],
     },
     mainnet: {
       url: `https://mainnet.infura.io/v3/${INFURA_KEY}`,
