@@ -2,22 +2,61 @@
 	import '../app.postcss';
 	import { browser } from '$app/environment';
 	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Badge, Button } from 'flowbite-svelte';
-	import { signerAddress, loading, chainId, wagmiLoaded, connected, web3Modal } from 'svelte-wagmi';
+	import { signerAddress, loading, chainId, wagmiLoaded, connected, web3Modal, defaultConfig } from 'svelte-wagmi';
 	import { configureWagmi, disconnectWagmi } from 'svelte-wagmi';
 	import { page } from '$app/stores';
 
 	$: activeUrl = $page.url.pathname;
 
-	if (browser) {
-		configureWagmi({
-			walletconnect: true,
-			walletconnectProjectID: '5a5f93d9fc51dcd86e891d30a5267400',
-			alchemyKey: 'trhh_mk0ukEsZAy03P464_BvYr4UUln6',
-			autoConnect: true
-		});
-	}
+	// if (browser) {
+	// 	configureWagmi({
+	// 		walletconnect: true,
+	// 		walletconnectProjectID: '5a5f93d9fc51dcd86e891d30a5267400',
+	// 		alchemyKey: 'trhh_mk0ukEsZAy03P464_BvYr4UUln6',
+	// 		autoConnect: true
+	// 	});
+	// }
+
+	import { bet, current_max_bet,getContractValue } from '../lib/Service/contractService';
+	import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
+	import {
+		configureChains,
+	} from '@wagmi/core';
+	import { createConfig, sepolia } from '@wagmi/core';
+	import { publicProvider } from 'wagmi/providers/public';
+
+	const { chains, publicClient, webSocketPublicClient } = configureChains(
+		[sepolia],
+		[publicProvider()]
+	);
+
+	// Set up wagmi config
+	 createConfig({
+		autoConnect: false,
+		connectors: [
+			new MetaMaskConnector({ chains })
+			// new WalletConnectConnector({
+			//   chains,
+			//   options: {
+			//     projectId: WALLET_CONNECT_PROJECT_ID,
+			//   },
+			// }),
+		],
+		publicClient,
+		webSocketPublicClient
+	});
+
 	// Function to handle wallet connection
 	async function connectWallet() {
+		const blockBet = defaultConfig({
+			appName: 'blockBet',
+			walletConnectProjectId: '5a5f93d9fc51dcd86e891d30a5267400',
+			alchemyId: 'trhh_mk0ukEsZAy03P464_BvYr4UUln6'
+		});
+
+		await blockBet.init();
+
+		
 		if (wagmiLoaded) {
 			await $web3Modal.openModal();
 		}
@@ -108,4 +147,9 @@
 		</div>
 	</NavUl>
 </Navbar>
+
+<Button on:click={bet}>Bet (Still have to do)</Button>
+<Button on:click={getContractValue}>GetContractValue</Button>
+<Button on:click={current_max_bet}>current_max_bet</Button>
+
 <slot />
