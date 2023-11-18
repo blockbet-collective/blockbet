@@ -87,7 +87,7 @@
 					{game.description}
 				</p>
 				<div class="flex items-center justify-between mt-4">
-					<Input class="mr-4 " />
+					<Input class="mr-4" placeholder="4.20 eth" />
 					<Button class="w-[100px]">Play</Button>
 				</div>
 			</div>
