@@ -21,7 +21,7 @@
 	async function loadMaxBet(chainId: number) {
 		isLoadingMaxBet = true;
 		try {
-			const response = (await current_max_bet(chainId)) as string;
+			const response = (await current_max_bet()) as string;
 			const bigIntResponse = Number(response);
 			const divisor = Number(10 ** 18);
 			const result = bigIntResponse / divisor;
@@ -38,7 +38,7 @@
 	async function loadTVL(chainId: number) {
 		isLoadingTVL = true;
 		try {
-			const response = await liquidity(chainId);
+			const response = await liquidity();
 			tvl = response.formatted;
 		} catch (error) {
 			console.error(error);
