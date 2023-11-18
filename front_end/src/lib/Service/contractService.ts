@@ -20,39 +20,12 @@ function getContractAddress(id: number | null | undefined): string {
 		// Arbitrum testnet 
 		case 421613:
 			return '0x2f210A4823B8bF68811691E7aFE9efDEf77f3AB6';
-	
-
-			
-		case 1:
-			return 'Mainnet';
-		case 3:
-			return 'Ropsten';
-		case 4:
-			return 'Rinkeby';
-		case 5:
-			return 'Goerli';
-		case 42:
-			return 'Kovan';
-		case 8453:
-			return 'Base';
-		case 84531:
-			return 'Base Goerli Testnet';
-		case 84532:
-			return 'Base Sepolia Testnet';
-		case 88888:
-			return 'Chiliz';
-		case 88880:
-			return 'Chiliz Scoville Testnet';
-		case 534352:
-			return 'Scroll';
-		case 1442:
-			return 'Polygon zkEVM Testnet';
-		case 1101:
-			return 'Polygon zkEVM';
-		case 42161:
-			return 'Arbitrum One';
-		case 421614:
-			return 'Arbitrum Sepolia';
+		// Mantle testnet 
+		case 5001:
+			return '0x2f210A4823B8bF68811691E7aFE9efDEf77f3AB6';
+		// Chiliz testnet 
+		case 88882:
+			return '0x5332Fb6cC4dddbb4FcEb89B8F51C4F27DC272dF9';
 		default:
 			return 'Unknown';
 	}

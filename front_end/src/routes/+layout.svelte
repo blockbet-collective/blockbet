@@ -1,15 +1,7 @@
 <script lang="ts">
 	import '../app.postcss';
 	import { browser } from '$app/environment';
-	import {
-		Navbar,
-		NavBrand,
-		NavLi,
-		NavUl,
-		NavHamburger,
-		Badge,
-		Button,
-	} from 'flowbite-svelte';
+	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Badge, Button } from 'flowbite-svelte';
 	import {
 		signerAddress,
 		loading,
@@ -44,7 +36,7 @@
 	import { page } from '$app/stores';
 
 	$: activeUrl = $page.url.pathname;
-	
+
 	const chilizTestnet: Chain = {
 		id: 88_882,
 		name: 'Chiliz Spicy Testnet',
@@ -150,6 +142,10 @@
 				return 'Arbitrum Sepolia';
 			case 421613:
 				return 'Arbitrum Goerli';
+			case 5001:
+				return 'Mantle Testnet';
+			case 88882:
+				return 'Chiliz Testnet';
 			default:
 				return 'Unknown';
 		}

@@ -38,6 +38,8 @@ const configHardhat: HardhatUserConfig = {
       linea: LINEA_ETHERSCAN_API_KEY,
       scroll: SCROLL_ETHERSCAN_API_KEY,
       abitrum: ETHERSCAN_API_KEY,
+      mantle: ETHERSCAN_API_KEY,
+      chiliz: ETHERSCAN_API_KEY,
     },
     customChains: [
       {
@@ -49,11 +51,27 @@ const configHardhat: HardhatUserConfig = {
         }
       },
       {
+        network: "mantle",
+        chainId: 5001,
+        urls: {
+          apiURL: "https://explorer.testnet.mantle.xyz/api",
+          browserURL: "https://explorer.testnet.mantle.xyz/"
+        }
+      },
+      {
         network: "scroll",
         chainId: 534351,
         urls: {
           apiURL: "https://api-sepolia.scrollscan.com/api",
           browserURL: "https://sepolia.scrollscan.com"
+        }
+      },
+      {
+        network: "chiliz",
+        chainId: 88882,
+        urls: {
+          apiURL: "https://spicy-explorer.chiliz.com/api",
+          browserURL: "https://spicy-explorer.chiliz.com/"
         }
       }
     ]
@@ -83,6 +101,16 @@ const configHardhat: HardhatUserConfig = {
     arbitrumGoerli: {
       url: 'https://goerli-rollup.arbitrum.io/rpc',
       chainId: 421613,
+      accounts: [SEPOLIA_KEY],
+    },
+    mantle: {
+      url: "https://rpc.testnet.mantle.xyz/",
+      chainId: 5001,
+      accounts: [SEPOLIA_KEY],
+    },
+    chiliz: {
+      url: "https://spicy-rpc.chiliz.com/",
+      chainId: 88882,
       accounts: [SEPOLIA_KEY],
     },
     mainnet: {
