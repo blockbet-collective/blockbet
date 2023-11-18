@@ -2,37 +2,38 @@
 
 import { abi } from './abi';
 
-import { getContract, readContract } from '@wagmi/core';
+import { getContract, readContract, writeContract } from '@wagmi/core';
 
 // Function to call the bet entrypoint
 export async function bet() {
-	// TODO
-	// const contract = getContract({
-	//     address: '0xbDa1E051990Cf381bB8b9F0aeAA3c868933C8D74',
-	//     abi: abi,
-	// })
-	// console.log(contract)
+    const tx = await writeContract({
+        address: '0xbDa1E051990Cf381bB8b9F0aeAA3c868933C8D74',
+        abi: abi,
+        functionName: 'bet',
+        value: 1n
+    })
+    console.log(tx)
 }
 
 // Function to call the bet entrypoint
 export async function getContractValue(chainId: number | null | undefined) {
-	const contract = getContract({
-		address: '0xbDa1E051990Cf381bB8b9F0aeAA3c868933C8D74',
-		chainId: chainId ?? 11155111,
-		abi: abi
-	});
+    const contract = getContract({
+        address: '0xbDa1E051990Cf381bB8b9F0aeAA3c868933C8D74',
+        chainId: chainId ?? 11155111,
+        abi: abi
+    });
 
-	console.log(contract);
+    console.log(contract);
 }
 
 // Function to get the current_max_bet
 export async function current_max_bet(chainId: number | null | undefined) {
-	const data = await readContract({
-		address: '0xbDa1E051990Cf381bB8b9F0aeAA3c868933C8D74',
-		chainId: chainId ?? 11155111,
-		abi: abi,
-		functionName: 'current_max_bet'
-	});
+    const data = await readContract({
+        address: '0xbDa1E051990Cf381bB8b9F0aeAA3c868933C8D74',
+        chainId: chainId ?? 11155111,
+        abi: abi,
+        functionName: 'current_max_bet'
+    });
 
-	console.log(data);
+    console.log(data);
 }
