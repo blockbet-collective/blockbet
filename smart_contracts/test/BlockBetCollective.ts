@@ -27,6 +27,18 @@ describe("BlockBetCollective", function () {
       expect(await blockBetCollective.totalSupply()).to.equal(BigInt(0).toString())
     });
 
+    it("Check URL", async function () {
+      const { blockBetCollective } = await loadFixture(deployFixture);
+
+      const ONE_GWEI = 1_000_000_000;
+
+      const depositAmount = ONE_GWEI;
+
+      // Deposit 
+      await blockBetCollective.deposit_funds({ value: depositAmount });
+    });
+
+
     it("Should be able to deposit funds", async function () {
       const { owner, blockBetCollective } = await loadFixture(deployFixture);
 
@@ -38,14 +50,14 @@ describe("BlockBetCollective", function () {
       await blockBetCollective.deposit_funds({ value: depositAmount });
       expect(await blockBetCollective.current_max_bet()).to.equal((depositAmount / 10).toString());
       expect(await blockBetCollective.totalSupply()).to.equal((depositAmount).toString());
-      expect(await blockBetCollective.balanceOf(owner.address)).to.equal((depositAmount).toString());
+      expect(await blockBetCollective["balanceOf(address)"](owner.address)).to.equal((depositAmount).toString());
 
       // Deposit second time
       await blockBetCollective.deposit_funds({ value: depositAmount });
 
       expect(await blockBetCollective.current_max_bet()).to.equal((2 * depositAmount / 10).toString());
       expect(await blockBetCollective.totalSupply()).to.equal((2 * depositAmount).toString());
-      expect(await blockBetCollective.balanceOf(owner.address)).to.equal((2 * depositAmount).toString());
+      expect(await blockBetCollective["balanceOf(address)"](owner.address)).to.equal((2 * depositAmount).toString());
     });
 
 
@@ -60,13 +72,13 @@ describe("BlockBetCollective", function () {
       await blockBetCollective.deposit_funds({ value: depositAmount });
       expect(await blockBetCollective.current_max_bet()).to.equal((depositAmount / 10).toString());
       expect(await blockBetCollective.totalSupply()).to.equal((depositAmount).toString());
-      expect(await blockBetCollective.balanceOf(owner.address)).to.equal((depositAmount).toString());
+      expect(await blockBetCollective["balanceOf(address)"](owner.address)).to.equal((depositAmount).toString());
 
       // Withdraw
       await blockBetCollective.withdraw_funds(depositAmount);
       expect(await blockBetCollective.current_max_bet()).to.equal((0).toString());
       expect(await blockBetCollective.totalSupply()).to.equal((0).toString());
-      expect(await blockBetCollective.balanceOf(owner.address)).to.equal((0).toString());
+      expect(await blockBetCollective["balanceOf(address)"](owner.address)).to.equal((0).toString());
     });
 
     it("Should be able to bet", async function () {
@@ -80,7 +92,7 @@ describe("BlockBetCollective", function () {
       await blockBetCollective.deposit_funds({ value: depositAmount });
       expect(await blockBetCollective.current_max_bet()).to.equal((depositAmount / 10).toString());
       expect(await blockBetCollective.totalSupply()).to.equal((depositAmount).toString());
-      expect(await blockBetCollective.balanceOf(owner.address)).to.equal((depositAmount).toString());
+      expect(await blockBetCollective["balanceOf(address)"](owner.address)).to.equal((depositAmount).toString());
 
       // Doing a monte carlo simulation to check that our casino never runs out of funds
       for (let i = 0; i < 100; i++) {
