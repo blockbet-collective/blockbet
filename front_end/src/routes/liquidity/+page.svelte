@@ -1,6 +1,36 @@
 <script lang="ts">
+	import { current_max_bet } from '$lib/Service/contractService';
 	import { Button, Card, Input } from 'flowbite-svelte';
 	import { ChartSolid, FaceGrinSolid } from 'flowbite-svelte-icons';
+	import { chainId } from 'svelte-wagmi';
+
+	chainId.subscribe((id) => {
+		if (id) {
+			loadMaxBet(id);
+			loadTVL(id);
+		}
+	});
+
+	let isLoadingMaxBet: boolean = false;
+	let isLoadingTVL: boolean = false;
+
+	let maxBet: string = '';
+	let tvl: string = '';
+
+	async function loadMaxBet(chainId: number) {
+		isLoadingMaxBet = true;
+		const maxBet = await current_max_bet(chainId);
+		setTimeout(() => {
+			isLoadingMaxBet = false;
+		}, 1000);
+	}
+
+	async function loadTVL(chainId: number) {
+		isLoadingTVL = true;
+		setTimeout(() => {
+			isLoadingTVL = false;
+		}, 1000);
+	}
 </script>
 
 <div class="flex items-center justify-center space-x-4 m-10">
