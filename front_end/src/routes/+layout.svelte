@@ -25,7 +25,13 @@
 		arbitrumNova,
 		type Chain,
 		mantle,
-		mantleTestnet
+		mantleTestnet,
+		lineaTestnet,
+		linea,
+		scroll,
+		scrollSepolia,
+		polygonZkEvmTestnet,
+		polygonZkEvm
 	} from '@wagmi/core/chains';
 
 	import { page } from '$app/stores';
@@ -33,6 +39,34 @@
 	$: activeUrl = $page.url.pathname;
 
 	const WALLET_CONNECT_PROJECT_ID = '5a5f93d9fc51dcd86e891d30a5267400';
+
+	const chilizTestnet: Chain = {
+		id: 88_882,
+		name: 'Chiliz Spicy Testnet',
+		network: 'chiliz-spicy-Testnet',
+		nativeCurrency: {
+			decimals: 18,
+			name: 'CHZ',
+			symbol: 'CHZ'
+		},
+		rpcUrls: {
+			default: {
+				http: ['https://spicy-rpc.chiliz.com'],
+				webSocket: ['wss://spicy-rpc-ws.chiliz.com']
+			},
+			public: {
+				http: ['https://spicy-rpc.chiliz.com'],
+				webSocket: ['wss://spicy-rpc-ws.chiliz.com']
+			}
+		},
+		blockExplorers: {
+			default: {
+				name: 'Chiliz Explorer',
+				url: 'http://spicy-explorer.chiliz.com'
+			}
+		},
+		testnet: true
+	};
 
 	onMount(async () => {
 		if (browser) {
@@ -45,11 +79,18 @@
 					base,
 					baseSepolia,
 					chiliz,
+					chilizTestnet,
 					arbitrum,
 					arbitrumNova,
 					arbitrumSepolia,
 					mantle,
-					mantleTestnet
+					mantleTestnet,
+					lineaTestnet,
+					linea,
+					scroll,
+					scrollSepolia,
+					polygonZkEvmTestnet,
+					polygonZkEvm
 				],
 				appName: 'blockbet.kit',
 				walletConnectProjectId: '5a5f93d9fc51dcd86e891d30a5267400',
