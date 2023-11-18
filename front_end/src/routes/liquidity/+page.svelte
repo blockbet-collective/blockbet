@@ -1,15 +1,11 @@
 <script lang="ts">
-	import { current_max_bet } from '$lib/Service/contractService';
+	import { current_max_bet, liquidity } from '$lib/Service/contractService';
 	import { Button, Card, Input } from 'flowbite-svelte';
 	import { ChartSolid, FaceGrinSolid } from 'flowbite-svelte-icons';
 	import { chainId } from 'svelte-wagmi';
-
-	chainId.subscribe((id) => {
-		if (id) {
-			loadMaxBet(id);
-			loadTVL(id);
-		}
-	});
+	import { Spinner } from 'flowbite-svelte';
+	import { onDestroy, onMount } from 'svelte';
+	import { browser } from '$app/environment';
 
 	let isLoadingMaxBet: boolean = false;
 	let isLoadingTVL: boolean = false;
@@ -19,17 +15,28 @@
 
 	async function loadMaxBet(chainId: number) {
 		isLoadingMaxBet = true;
-		const maxBet = await current_max_bet(chainId);
-		setTimeout(() => {
-			isLoadingMaxBet = false;
-		}, 1000);
+		const response = (await current_max_bet(chainId)) as string;
+		const bigIntResponse = Number(response);
+		const divisor = Number(10 ** 18);
+		const result = bigIntResponse / divisor;
+		maxBet = result.toLocaleString('en-US', {
+			maximumFractionDigits: 10
+		});
+		isLoadingMaxBet = false;
 	}
 
 	async function loadTVL(chainId: number) {
 		isLoadingTVL = true;
-		setTimeout(() => {
-			isLoadingTVL = false;
-		}, 1000);
+		const response = await liquidity(chainId);
+		tvl = response.formatted;
+		isLoadingTVL = false;
+	}
+
+	$: {
+		if ($chainId) {
+			loadMaxBet($chainId);
+			loadTVL($chainId);
+		}
 	}
 </script>
 
@@ -40,7 +47,13 @@
 		<p class="mb-3 font-normal text-gray-500 dark:text-gray-400">
 			The treasury currently holds the displayed amount of liquidity in the bank
 		</p>
-		<h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">42 eth</h5>
+		{#if isLoadingTVL}
+			<Spinner />
+		{:else}
+			<h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+				{tvl} eth
+			</h5>
+		{/if}
 	</Card>
 	<Card>
 		<FaceGrinSolid class="w-7 h-7 mb-3 text-gray-500 dark:text-gray-400" />
@@ -50,6 +63,12 @@
 		<p class="mb-3 font-normal text-gray-500 dark:text-gray-400">
 			The maximum bet possible based on current total liquidity
 		</p>
-		<h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">2.1 eth</h5>
+		{#if isLoadingMaxBet}
+			<Spinner />
+		{:else}
+			<h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+				{maxBet} eth
+			</h5>
+		{/if}
 	</Card>
 </div>
