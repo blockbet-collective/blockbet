@@ -10,13 +10,13 @@ function getContractAddress(id: number | null | undefined): string {
 	switch (id) {
 		// Linea testnet 
 		case 59140:
-			return '0x2f210A4823B8bF68811691E7aFE9efDEf77f3AB6';
+			return '0xBeCfF3A3f23928705c8d707AD49b076996a1d3Ed';
 		// Sepolia testnet 
 		case 11155111:
 			return '0xc034a052464c7d8bedc111ef2d448fd15b940c8b';
 		// Scroll testnet 
 		case 534351:
-			return '0xe9A95a435D248873e107B68d4455c595119DF5BC';
+			return '0x2CDC43847Da0cfA8A93DAD71792417D455F4785b';
 		// Arbitrum testnet 
 		case 421613:
 			return '0x2f210A4823B8bF68811691E7aFE9efDEf77f3AB6';
