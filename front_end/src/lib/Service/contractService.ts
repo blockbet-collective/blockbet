@@ -5,12 +5,12 @@ import { abi } from './abi';
 import { getContract, readContract, writeContract } from '@wagmi/core';
 
 // Function to call the bet entrypoint
-export async function bet() {
+export async function bet(amount: string) {
     const tx = await writeContract({
         address: '0xbDa1E051990Cf381bB8b9F0aeAA3c868933C8D74',
         abi: abi,
         functionName: 'bet',
-        value: 1n
+        value: BigInt(amount)
     })
     console.log(tx)
 }

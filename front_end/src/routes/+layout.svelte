@@ -1,7 +1,16 @@
 <script lang="ts">
 	import '../app.postcss';
 	import { browser } from '$app/environment';
-	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Badge, Button } from 'flowbite-svelte';
+	import {
+		Navbar,
+		NavBrand,
+		NavLi,
+		NavUl,
+		NavHamburger,
+		Badge,
+		Button,
+		Input
+	} from 'flowbite-svelte';
 	import {
 		signerAddress,
 		loading,
@@ -37,6 +46,8 @@
 	import { page } from '$app/stores';
 
 	$: activeUrl = $page.url.pathname;
+
+	let something = '';
 
 	const WALLET_CONNECT_PROJECT_ID = '5a5f93d9fc51dcd86e891d30a5267400';
 
@@ -188,7 +199,11 @@
 	</NavUl>
 </Navbar>
 
-<Button on:click={bet}>Bet (Still have to do)</Button>
+<div class="flex items-center justify-between mt-4">
+	<Input bind:value={something} class="mr-4" placeholder="1 wei" />
+	<Button on:click={() => bet(something)}>Bet</Button>
+</div>
+
 <Button
 	on:click={() => {
 		console.log($chainId);
