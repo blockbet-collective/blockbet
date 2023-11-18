@@ -1,5 +1,10 @@
 <script lang="ts">
-	import { current_max_bet, liquidity } from '$lib/Service/contractService';
+	import {
+		currentMaxBet,
+		deposit_funds,
+		liquidity,
+		withdraw_funds
+	} from '$lib/Service/contractService';
 	import { Button, Card, Input } from 'flowbite-svelte';
 	import { ChartSolid, FaceGrinSolid } from 'flowbite-svelte-icons';
 	import { chainId } from 'svelte-wagmi';
@@ -21,7 +26,7 @@
 	async function loadMaxBet(chainId: number) {
 		isLoadingMaxBet = true;
 		try {
-			const response = (await current_max_bet()) as string;
+			const response = (await currentMaxBet()) as string;
 			const bigIntResponse = Number(response);
 			const divisor = Number(10 ** 18);
 			const result = bigIntResponse / divisor;
@@ -98,7 +103,13 @@
 				<div>
 					Provide Liquidity
 					<div class="flex items-center">
-						<Input bind:value={provideLiquidityValue} /><Button class="w-[150px] ml-2"
+						<Input bind:value={provideLiquidityValue} /><Button
+							on:click={() => {
+								let depositFundsInWei = Number(provideLiquidityValue) * Number(10 ** 18);
+
+								deposit_funds(depositFundsInWei);
+							}}
+							class="w-[150px] ml-2"
 							>{#if isLoadingTransaction}<Spinner size="5" />{:else}Add{/if}</Button
 						>
 					</div>
@@ -106,7 +117,13 @@
 				<div>
 					Unlock shares
 					<div class="flex items-center">
-						<Input bind:value={withdrawValue} /><Button class="w-[150px] ml-2"
+						<Input bind:value={withdrawValue} /><Button
+							on:click={() => {
+								let withdrawValueFunds = Number(withdrawValue) * Number(10 ** 18);
+
+								withdraw_funds(withdrawValueFunds);
+							}}
+							class="w-[150px] ml-2"
 							>{#if isLoadingTransaction}<Spinner size="5" />{:else}Withdraw{/if}</Button
 						>
 					</div>
