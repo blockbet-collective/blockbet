@@ -33,10 +33,22 @@ const configHardhat: HardhatUserConfig = {
     apiKey: {
       sepolia: ETHERSCAN_API_KEY,
       mainnet: ETHERSCAN_API_KEY,
-    }
+      linea: ETHERSCAN_API_KEY,
+      scroll: ETHERSCAN_API_KEY,
+    },
+    customChains: [
+      {
+        network: "linea",
+        chainId: 59140,
+        urls: {
+          apiURL: "https://api-testnet.lineascan.build/api",
+          browserURL: "https://explorer.goerli.linea.build/"
+        }
+      }
+    ]
   },
   gasReporter: {
-    enabled:true,
+    enabled: true,
     currency: 'USDC',
     coinmarketcap: COINMARKETCAP_API_KEY,
   },
@@ -46,6 +58,16 @@ const configHardhat: HardhatUserConfig = {
       url: `https://sepolia.infura.io/v3/${INFURA_KEY}`,
       accounts: [SEPOLIA_KEY],
       chainId: 11155111,
+    },
+    scroll: {
+      url: `https://sepolia-rpc.scroll.io/`,
+      accounts: [SEPOLIA_KEY],
+      chainId: 11155111,
+    },
+    linea: {
+      url: `  https://linea-goerli.infura.io/v3/${INFURA_KEY}`,
+      accounts: [SEPOLIA_KEY],
+      chainId: 59140,
     },
     mainnet: {
       url: `https://mainnet.infura.io/v3/${INFURA_KEY}`,

@@ -1,5 +1,12 @@
 # Hardhat Project
 
+## Contract deployment addresses
+
+Sepolia testnet:
+0xc034a052464c7d8BedC111EF2d448fd15b940c8b
+
+Linea testnet:
+0x2f210A4823B8bF68811691E7aFE9efDEf77f3AB6
 
 ## Setup of this repo
 

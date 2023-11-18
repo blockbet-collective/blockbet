@@ -20,7 +20,7 @@ async function deployBlockBetCollective(): Promise<BlockBetCollective> {
     await blockBetCollective.deployed()
 
     console.log('sleep')
-    await sleep(80000)
+    await sleep(50000)
 
     if (network.name !== 'hardhat') {
         // Verifying BlockBetCollective
@@ -28,8 +28,7 @@ async function deployBlockBetCollective(): Promise<BlockBetCollective> {
             await run('verify:verify', {
                 contract: 'contracts/BlockBetCollective.sol:BlockBetCollective',
                 address: blockBetCollective.address,
-                constructorArguments: [
-                ]
+                constructorArguments: []
             })
         } catch (err) {
             console.error(err)

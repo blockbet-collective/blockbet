@@ -9,6 +9,11 @@ contract BlockBetCollective is ERC20, ERC1155 {
     uint256 public current_max_bet;
     uint256 public coinflip_win_percentage = 55;
 
+    event Won();
+    event Lost();
+    event DepositFunds(uint amount, address user);
+    event WithdrawFunds(uint amount, address user);
+
     string URL_0 =
         "https://bafybeia3fhtkn52dfplyx4p5f3cvcvggyvauvfbpgnt4h2dqen6pvtwrrm.ipfs.nftstorage.link/1.json";
     string URL_1 =
@@ -45,9 +50,13 @@ contract BlockBetCollective is ERC20, ERC1155 {
             // You won.
             current_max_bet -= msg.value / 10;
             payable(msg.sender).transfer(msg.value * 2);
+
+            emit Won();
         } else {
             // You lost.
             current_max_bet += msg.value / 10;
+
+            emit Lost();
         }
     }
 
@@ -97,6 +106,8 @@ contract BlockBetCollective is ERC20, ERC1155 {
         // Mint NFT (we have 9 NFT pictures)
         _mint(msg.sender, get_randomness() % 9, 1, "");
         update_max_bet();
+
+        emit DepositFunds(msg.value, msg.sender);
     }
 
     // Function to withdraw funds
@@ -107,6 +118,8 @@ contract BlockBetCollective is ERC20, ERC1155 {
         _burn(msg.sender, tokenAmount);
         payable(msg.sender).transfer(ethToWithdraw);
         update_max_bet();
+
+        emit WithdrawFunds(ethToWithdraw, msg.sender);
     }
 
     // Internal/Private functions
