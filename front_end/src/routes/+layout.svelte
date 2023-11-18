@@ -111,12 +111,6 @@
 		}
 	});
 
-	import {
-		bet,
-		current_max_bet,
-		getContractValue,
-		liquidity
-	} from '../lib/Service/contractService';
 	import { onMount } from 'svelte';
 
 	function nameForChainId(id: number): string {
@@ -203,29 +197,4 @@
 		</div>
 	</NavUl>
 </Navbar>
-
-<div class="flex items-center justify-between mt-4">
-	<Input bind:value={something} class="mr-4" placeholder="1 wei" />
-	<Button on:click={() => bet(something)}>Bet</Button>
-</div>
-
-<Button
-	on:click={() => {
-		console.log($chainId);
-		getContractValue($chainId);
-	}}>GetContractValue</Button
->
-<Button
-	on:click={() => {
-		console.log($chainId);
-		current_max_bet($chainId);
-	}}>current_max_bet</Button
->
-<Button
-	on:click={() => {
-		console.log($chainId);
-		liquidity($chainId);
-	}}>liquidity</Button
->
-
 <slot />
