@@ -12,8 +12,8 @@
 		</p>
 		<h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">42 eth</h5>
 	</Card>
-	<Card
-		><FaceGrinSolid class="w-7 h-7 mb-3 text-gray-500 dark:text-gray-400" />
+	<Card>
+		<FaceGrinSolid class="w-7 h-7 mb-3 text-gray-500 dark:text-gray-400" />
 		<h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
 			Max Bet
 		</h5>
