@@ -13,9 +13,11 @@ function getContractAddress(id: number | null | undefined): string {
 			return '0x2f210A4823B8bF68811691E7aFE9efDEf77f3AB6';
 		// Sepolia testnet 
 		case 11155111:
-			return '0xbDa1E051990Cf381bB8b9F0aeAA3c868933C8D74';
-
-
+			return '0xc034a052464c7d8bedc111ef2d448fd15b940c8b';
+		// Scroll testnet 
+		case 534351:
+			return '0xe9A95a435D248873e107B68d4455c595119DF5BC';
+	
 		case 1:
 			return 'Mainnet';
 		case 3:
@@ -38,8 +40,6 @@ function getContractAddress(id: number | null | undefined): string {
 			return 'Chiliz Scoville Testnet';
 		case 534352:
 			return 'Scroll';
-		case 534351:
-			return 'Scroll Sepolia Testnet';
 		case 1442:
 			return 'Polygon zkEVM Testnet';
 		case 1101:
@@ -84,7 +84,10 @@ export async function withdraw_funds(amount: number) {
 }
 
 // Function to call the bet entrypoint
-export async function bet(amountInWei: string) {
+export async function bet(amountWithDecimalComma: string) {
+
+	let amountInWei = Number(amountWithDecimalComma) * Number(10 ** 18);
+
 	const chainIdValue = get(chainId);
 	const tx = await writeContract({
 		address: getContractAddress(chainIdValue) as `0x${string}`,

@@ -62,7 +62,7 @@ const configHardhat: HardhatUserConfig = {
     scroll: {
       url: `https://sepolia-rpc.scroll.io/`,
       accounts: [SEPOLIA_KEY],
-      chainId: 11155111,
+      chainId: 534351,
     },
     linea: {
       url: `  https://linea-goerli.infura.io/v3/${INFURA_KEY}`,
