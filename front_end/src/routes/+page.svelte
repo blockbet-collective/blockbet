@@ -3,7 +3,6 @@
 	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Badge, Button } from 'flowbite-svelte';
 	import { signerAddress, loading, chainId, wagmiLoaded, connected, web3Modal } from 'svelte-wagmi';
 	import { configureWagmi, disconnectWagmi } from 'svelte-wagmi';
-	import { useNetwork } from '@wagmi/core';
 
 	if (browser) {
 		configureWagmi({
@@ -77,7 +76,6 @@
 
 <Navbar>
 	<NavBrand href="/">
-		<img src="/images/flowbite-svelte-icon-logo.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
 		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite</span
 		>
 	</NavBrand>
