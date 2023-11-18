@@ -76,7 +76,7 @@
 
 <Navbar>
 	<NavBrand href="/">
-		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite</span
+		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">BlockBet</span
 		>
 	</NavBrand>
 	<NavHamburger />
@@ -89,6 +89,8 @@
 		{/if}
 		{#if $loading}
 			<Badge>Loading...</Badge>
+		{:else if $signerAddress && $chainId}
+			<div />
 		{:else if connected}
 			<Button on:click={connectWallet}>Connect Wallet</Button>
 		{:else}
