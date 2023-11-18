@@ -12,7 +12,21 @@
 		defaultConfig,
 		configureWagmi
 	} from 'svelte-wagmi';
-	import { mainnet, polygon, optimism, arbitrum, sepolia, type Chain } from '@wagmi/core/chains';
+	import {
+		mainnet,
+		polygon,
+		optimism,
+		arbitrum,
+		sepolia,
+		baseSepolia,
+		base,
+		chiliz,
+		arbitrumSepolia,
+		arbitrumNova,
+		type Chain,
+		mantle,
+		mantleTestnet
+	} from '@wagmi/core/chains';
 
 	import { page } from '$app/stores';
 
@@ -23,18 +37,25 @@
 	onMount(async () => {
 		if (browser) {
 			const blockbetKit = defaultConfig({
-				chains: [mainnet, polygon, optimism, arbitrum, sepolia],
+				chains: [
+					mainnet,
+					polygon,
+					optimism,
+					sepolia,
+					base,
+					baseSepolia,
+					chiliz,
+					arbitrum,
+					arbitrumNova,
+					arbitrumSepolia,
+					mantle,
+					mantleTestnet
+				],
 				appName: 'blockbet.kit',
 				walletConnectProjectId: '5a5f93d9fc51dcd86e891d30a5267400',
 				alchemyId: 'trhh_mk0ukEsZAy03P464_BvYr4UUln6'
 			});
 			await blockbetKit.init();
-			// configureWagmi({
-			// 	walletconnect: true,
-			// 	walletconnectProjectID: '5a5f93d9fc51dcd86e891d30a5267400',
-			// 	alchemyKey: 'trhh_mk0ukEsZAy03P464_BvYr4UUln6',
-			// 	autoConnect: true
-			// });
 		}
 	});
 
